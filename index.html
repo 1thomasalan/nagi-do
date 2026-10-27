@@ -349,6 +349,9 @@ function wireSegs(){document.querySelectorAll('.sheet .seg button').forEach(b=>b
 function settings(){
  const sw=Object.entries(THEMES).map(([k,[n,,g]])=>`<button class="sw ${S.theme===k?'on':''}" data-theme="${k}" style="background:${g}"><small>${n}</small></button>`).join('');
  openSheet(`<h3>Settings</h3>
+ <div class="about"><div class="k">凪</div><h4>nagi-do</h4><div class="sub">The way of stillness</div>
+ <p>A personal space for meditation. Choose your time, settle into silence or soothing sounds, and follow your own rhythm with optional breathing guidance.</p>
+ <p class="m">Nagi (凪) is the calm when the wind drops and the sea goes still. Dō (道) is the way.</p></div>
  <div class="sec">Look</div>
  <div class="swrow"><div class="swatches">${sw}</div></div>
  <div class="opt"><span>Orb</span>${seg('orb',[['glow','Glow'],['ring','Ring'],['minimal','Minimal']])}</div>
@@ -367,10 +370,6 @@ function settings(){
  <div class="opt"><span>Interval bell</span>${seg('interval',[[0,'Off'],[1,'1m'],[5,'5m'],[10,'10m']])}</div>
  <div class="opt"><span>Vibrate at end</span>${seg('vib',[[true,'On'],[false,'Off']])}</div>
  <div class="opt" style="border:0"><span>Bell volume</span></div><input type="range" min="0.1" max="1" step="0.05" value="${S.vol}" id="vol">
- <div class="sec">About</div>
- <div class="about"><div class="k">凪</div><h4>nagi-do</h4><div class="sub">The way of stillness</div>
- <p>A personal space for meditation. Choose your time, settle into silence or soothing sounds, and follow your own rhythm with optional breathing guidance.</p>
- <p class="m">Nagi (凪) is the calm when the wind drops and the sea goes still. Dō (道) is the way.</p></div>
  <div class="sec">More</div>
  <div class="opt"><button id="resetLook">Restore original look & sound</button></div>
  <p style="color:var(--mut);line-height:1.6;font-size:13px">Tap the circle to begin or pause, hold it to end early. Tap ↻ for another quote. Sessions stay on this phone and also show in Streak.</p>
