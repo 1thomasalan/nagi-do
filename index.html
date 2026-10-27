@@ -74,6 +74,15 @@ body.keepquote.sitting #quote{opacity:.85!important}
 .qtools button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--mut);backdrop-filter:blur(6px);background:rgba(255,255,255,.04)}
 .qtools button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .qtools button:active{background:rgba(255,255,255,.12)}
+.brand{display:flex;align-items:baseline;gap:9px;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;text-transform:none;letter-spacing:3px;font-size:15px;color:var(--txt);opacity:.78}
+.brand b{font-weight:400;font-size:21px;letter-spacing:0;color:var(--glow);opacity:.9;text-shadow:0 0 14px color-mix(in srgb,var(--glow) 45%,transparent)}
+.top .tr{display:flex;align-items:center;gap:12px}
+.about{text-align:center;padding:6px 4px 2px}
+.about .k{font-size:42px;color:var(--glow);line-height:1;text-shadow:0 0 22px color-mix(in srgb,var(--glow) 40%,transparent)}
+.about h4{margin:8px 0 2px;font-weight:400;font-size:20px;letter-spacing:3px}
+.about .sub{font-family:system-ui,sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mut)}
+.about p{line-height:1.6;font-size:15px;margin:14px auto 6px;max-width:420px}
+.about .m{color:var(--mut);font-size:13px;font-style:italic}
 .top button#menuBtn{font-size:20px;letter-spacing:0;filter:grayscale(.3);opacity:.85}
 .sec{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mut);margin:20px 0 2px}
 .sheet{max-height:82vh;overflow-y:auto}
@@ -88,7 +97,7 @@ body.keepquote.sitting #quote{opacity:.85!important}
 <body>
 <div class="sky"></div>
 <div class="wrap">
-  <div class="top hide"><span id="date"></span><button id="menuBtn" aria-label="Settings">⚙️</button></div>
+  <div class="top hide"><span class="brand" aria-label="Nagi-do"><b>凪</b>nagi-do</span><span class="tr"><span id="date"></span><button id="menuBtn" aria-label="Settings">⚙️</button></span></div>
   <div class="quote hide" id="quote"><p id="qt"></p><small id="qa"></small><div class="qtools"><button id="qNext" aria-label="Another quote"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button><button id="qShare" aria-label="Share quote"><svg viewBox="0 0 24 24"><path d="M12 15V3"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg></button></div></div>
   <div class="orbwrap">
     <div class="orb" id="orb">
@@ -202,7 +211,7 @@ $('qShare').onclick=async()=>{const q=QUOTES[qi];const text=`“${q[0]}” — $
   if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text});return}
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='stillness-quote.png';a.click();
  }catch(e){if(e&&e.name==='AbortError')return;try{await navigator.clipboard.writeText(text)}catch(_){}}};
-$('date').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+$('date').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
 
 // picker
 const MINS=[1,3,5,10,15,20,30];
@@ -349,19 +358,23 @@ function settings(){
  <div class="opt"><span>Settle-in time</span>${seg('prep',[[0,'Off'],[10,'10s'],[30,'30s']])}</div>
  <div class="opt"><span>Breathing guide</span>${seg('breath',[['natural','Natural'],['calm','4·6'],['box','Box'],['relax','4·7·8']])}</div>
  <div class="opt"><span>Voice guide</span>${seg('voice',[[true,'On'],[false,'Off']])}</div>
- <div class="opt"><span>Background</span>${seg('ambient',[['off','Silence'],['forest','Forest'],['rain','Rain'],['ocean','Ocean'],['stream','Stream'],['om','Om']])}</div>
+ <div class="opt"><span>Background sound</span>${seg('ambient',[['off','Silence'],['forest','Forest'],['rain','Rain'],['ocean','Ocean'],['stream','Stream'],['om','Om']])}</div>
  <div class="opt" style="border:0"><span>Background volume</span></div><input type="range" min="0.05" max="1" step="0.05" value="${S.ambVol}" id="avol">
  <div class="sec">Bells</div>
  <div class="opt"><span>Ending sound</span>${seg('sound',[['bowl','Bowl'],['gong','Gong'],['chime','Chime']])}</div>
- <div class="opt"><span>Ending strikes</span>${seg('strikes',[[1,'1'],[3,'3']])}</div>
+ <div class="opt"><span>Number of bell sounds</span>${seg('strikes',[[1,'1'],[3,'3']])}</div>
  <div class="opt"><span>Starting bell</span>${seg('start',[[true,'On'],[false,'Off']])}</div>
  <div class="opt"><span>Interval bell</span>${seg('interval',[[0,'Off'],[1,'1m'],[5,'5m'],[10,'10m']])}</div>
  <div class="opt"><span>Vibrate at end</span>${seg('vib',[[true,'On'],[false,'Off']])}</div>
  <div class="opt" style="border:0"><span>Bell volume</span></div><input type="range" min="0.1" max="1" step="0.05" value="${S.vol}" id="vol">
+ <div class="sec">About</div>
+ <div class="about"><div class="k">凪</div><h4>nagi-do</h4><div class="sub">The way of stillness</div>
+ <p>A personal space for meditation. Choose your time, settle into silence or soothing sounds, and follow your own rhythm with optional breathing guidance.</p>
+ <p class="m">Nagi (凪) is the calm when the wind drops and the sea goes still. Dō (道) is the way.</p></div>
  <div class="sec">More</div>
  <div class="opt"><button id="resetLook">Restore original look & sound</button></div>
  <p style="color:var(--mut);line-height:1.6;font-size:13px">Tap the circle to begin or pause, hold it to end early. Tap ↻ for another quote. Sessions stay on this phone and also show in Streak.</p>
- <p style="color:var(--mut);font-size:12px">Nagi-do · the way of stillness · made for Alan by Hark</p>`);
+ <p style="color:var(--mut);font-size:12px">Nagi-do · made for Alan by Hark</p>`);
  wireSegs();
  document.querySelectorAll('.sw').forEach(b=>b.onclick=()=>{S.theme=b.dataset.theme;save();applyLook();document.querySelectorAll('.sw').forEach(x=>x.classList.toggle('on',x===b))});
  $('vol').onchange=e=>{S.vol=+e.target.value;save();strike()};
