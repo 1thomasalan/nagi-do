@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0e1420">
-<title>Nagi-do · The Way of Stillness</title>
+<title>Nagi-dō · The Way of Stillness</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@ body[data-theme=ocean]{--sky:radial-gradient(120% 80% at 50% 110%,#6fd6d6 0%,#2b
 body[data-theme=forest]{--sky:radial-gradient(120% 80% at 50% 110%,#b9cc8c 0%,#55806a 28%,#1f3b33 58%,#0a1613 90%);--glow:#e6f2c4}
 body[data-theme=sakura]{--sky:radial-gradient(120% 80% at 50% 110%,#ffd3de 0%,#e59ab5 27%,#7a5a85 57%,#1f1830 90%);--glow:#ffe3ec}
 body[data-theme=midnight]{--sky:radial-gradient(120% 80% at 50% 110%,#1b2131 0%,#090b11 50%,#000 85%);--glow:#cfd8ec}
-.wrap{position:relative;height:100%;height:100dvh;display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top) + clamp(14px,2.6dvh,28px)) 24px calc(env(safe-area-inset-bottom) + clamp(16px,3.2dvh,36px));max-width:640px;margin:0 auto}
+.wrap{position:relative;height:100%;height:100dvh;display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top) + clamp(14px,2.6dvh,28px)) 24px calc(env(safe-area-inset-bottom) + clamp(36px,5.8dvh,58px));max-width:640px;margin:0 auto}
 .hide{transition:opacity 1.2s}
 body.sitting .hide{opacity:0;pointer-events:none}
 /* top */
@@ -43,7 +43,7 @@ body.sitting .hide{opacity:0;pointer-events:none}
 #date button{font-size:14px;color:var(--txt)}
 /* quote */
 .quote{margin-top:clamp(18px,4dvh,44px);width:100%;max-width:min(560px,92%);text-align:center}
-.quote p{font-family:var(--serif);font-size:clamp(18px,min(5.6vw,3.3vh),30px);line-height:1.5;margin:0;text-wrap:balance}
+.quote p{font-family:var(--serif);font-size:clamp(16px,min(4.8vw,2.8vh),26px);line-height:1.5;margin:0;text-wrap:balance}
 .quote .by{display:flex;flex-direction:row;justify-content:center;align-items:center;gap:12px;margin-top:clamp(6px,1.2dvh,12px)}
 .quote .by .qt{display:contents}
 #qNext{order:-1}
@@ -54,8 +54,8 @@ body.sitting .hide{opacity:0;pointer-events:none}
 .qt svg{width:19px;height:19px}
 body.keepquote.sitting #quote{opacity:.85!important}
 /* orb */
-.orbwrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:0;container-type:size;padding:clamp(22px,4.5dvh,52px) 0}
-.orb{position:relative;width:min(58vw,250px,31vh);width:max(110px,min(62cqw,calc((100cqh - 36px) * .82),270px));aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.orbwrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:0;container-type:size;padding:clamp(18px,3.6dvh,44px) 0}
+.orb{position:relative;width:min(58vw,250px,31vh);width:max(120px,min(70cqw,calc((100cqh - 36px) * .9),300px));aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column}
 .orb::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--glow) 32%,transparent),color-mix(in srgb,var(--glow) 9%,transparent) 60%,transparent 72%);animation:breathe 10s cubic-bezier(.45,0,.55,1) infinite}
 body:not(.sitting) .orb::before{animation-duration:14s}
 @keyframes breathe{0%,100%{transform:scale(.82);opacity:.7}50%{transform:scale(1.08);opacity:1}}
@@ -92,8 +92,9 @@ body.insession .tide{visibility:hidden}
 .begin svg{width:18px;height:18px;fill:currentColor}
 .begin:active{transform:scale(.97)}
 body.insession .begin{background:rgba(11,15,25,.34);color:var(--txt);box-shadow:none}
-#holdhint{font-size:14px;color:var(--ink2);margin-top:10px;min-height:20px;opacity:0;transition:opacity 1s;text-shadow:0 1px 10px rgba(0,0,0,.35)}
-body.insession #holdhint{opacity:1}
+#holdhint{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + clamp(6px,1.2dvh,14px));text-align:center;pointer-events:none;font-size:14px;color:var(--ink2);min-height:20px;opacity:0;transition:opacity 1s;text-shadow:0 1px 10px rgba(0,0,0,.35)}
+body.insession #holdhint{opacity:1;animation:hintout 1.5s ease 7s forwards}
+@keyframes hintout{to{opacity:0}}
 .journey{flex:none;margin-top:clamp(8px,1.6dvh,18px);height:40px;padding:0 14px;border-radius:20px;font-size:15px;display:flex;align-items:center;gap:9px;background:rgba(11,15,25,.28)}
 .journey .dots{display:flex;gap:4px}
 .journey .dots span{width:7px;height:7px;border-radius:50%;background:var(--glow)}
@@ -176,7 +177,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 <body>
 <div class="sky"></div>
 <div class="wrap">
-  <div class="top hide"><span class="brand" aria-label="Nagi-do"><b aria-hidden="true">凪</b>nagi-do</span><span class="topr"><button class="jmini" id="jMini"></button><button class="iconbtn" id="menuBtn" aria-label="Settings"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button></span></div>
+  <div class="top hide"><span class="brand" aria-label="Nagi-dō"><b aria-hidden="true">凪</b>nagi-dō</span><span class="topr"><button class="jmini" id="jMini"></button><button class="iconbtn" id="menuBtn" aria-label="Settings"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button></span></div>
   <div id="date" class="hide"></div>
   <div class="quote hide" id="quote"><p id="qt"></p><div class="by"><cite id="qa"></cite><span class="qt">
     <button id="qNext" aria-label="Another quote"><svg class="i" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
@@ -298,7 +299,7 @@ async function quoteCard(){const W=1080,H=1350,c=document.createElement('canvas'
  x.fillStyle='#f6f3ec';x.font=`500 ${fs}px ${SER}`;lines.forEach((l,i)=>x.fillText(l,W/2,top+i*lh+fs));
  const ay=top+lines.length*lh+fs*.4+56;x.fillStyle=p[4];x.fillRect(W/2-28,ay-58,56,3);
  x.font=`400 36px ${SAN}`;x.fillStyle='rgba(246,243,236,.82)';x.fillText(q[1],W/2,ay);
- x.font=`500 34px ${SER}`;x.fillStyle='rgba(246,243,236,.7)';if('letterSpacing' in x)x.letterSpacing='4px';x.fillText('nagi-do',W/2,H-96);if('letterSpacing' in x)x.letterSpacing='0px';
+ x.font=`500 34px ${SER}`;x.fillStyle='rgba(246,243,236,.7)';if('letterSpacing' in x)x.letterSpacing='4px';x.fillText('nagi-dō',W/2,H-96);if('letterSpacing' in x)x.letterSpacing='0px';
  x.font=`400 24px ${SAN}`;x.fillStyle='rgba(246,243,236,.5)';x.fillText('The way of stillness',W/2,H-56);
  return new Promise(r=>c.toBlob(r,'image/png'))}
 $('qShare').onclick=async()=>{const q=QUOTES[qi];const text=`“${q[0]}” — ${q[1]}`;
@@ -486,10 +487,10 @@ function settings(){
  </div>
  <div class="grp" style="margin-top:20px"><button class="rowbtn" id="resetLook">Restore original look and sound</button></div>
  <p class="help">Swipe the numbers to choose your time. Tap Begin to start and Pause to rest; hold Pause to end early. Your sessions stay on this phone.</p>
- <div class="about"><div class="k" aria-hidden="true">凪</div><h4>nagi-do</h4><div class="sub">The way of stillness</div>
+ <div class="about"><div class="k" aria-hidden="true">凪</div><h4>nagi-dō</h4><div class="sub">The way of stillness</div>
  <p>A personal space for meditation. Choose your time, settle into silence or soothing sounds, and follow your own rhythm with optional breathing guidance.</p>
  <p class="m">Nagi (凪) is the calm when the wind drops and the sea goes still. Dō (道) is the way.</p></div>
- <p class="credit">Nagi-do, made for Alan by Hark</p>`);
+ <p class="credit">Nagi-dō, made for Alan by Hark</p>`);
  wireSegs();
  document.querySelectorAll('.look').forEach(b=>b.onclick=()=>{S.theme=b.dataset.theme;save();applyLook();document.querySelectorAll('.look').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)})});
  $('vol').onchange=e=>{S.vol=+e.target.value;save();strike()};
