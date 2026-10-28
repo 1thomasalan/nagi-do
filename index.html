@@ -30,7 +30,7 @@ body[data-theme=ocean]{--sky:radial-gradient(120% 80% at 50% 110%,#6fd6d6 0%,#2b
 body[data-theme=forest]{--sky:radial-gradient(120% 80% at 50% 110%,#b9cc8c 0%,#55806a 28%,#1f3b33 58%,#0a1613 90%);--glow:#e6f2c4}
 body[data-theme=sakura]{--sky:radial-gradient(120% 80% at 50% 110%,#ffd3de 0%,#e59ab5 27%,#7a5a85 57%,#1f1830 90%);--glow:#ffe3ec}
 body[data-theme=midnight]{--sky:radial-gradient(120% 80% at 50% 110%,#1b2131 0%,#090b11 50%,#000 85%);--glow:#cfd8ec}
-.wrap{position:relative;height:100%;display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top) + 14px) 24px calc(env(safe-area-inset-bottom) + 18px);max-width:640px;margin:0 auto}
+.wrap{position:relative;height:100%;height:100dvh;display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top) + clamp(14px,2.6dvh,28px)) 24px calc(env(safe-area-inset-bottom) + clamp(16px,3.2dvh,36px));max-width:640px;margin:0 auto}
 .hide{transition:opacity 1.2s}
 body.sitting .hide{opacity:0;pointer-events:none}
 /* top */
@@ -39,21 +39,23 @@ body.sitting .hide{opacity:0;pointer-events:none}
 .brand b{font-weight:500;font-size:22px;letter-spacing:0;color:var(--glow)}
 .iconbtn{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:var(--txt);background:rgba(11,15,25,.28)}
 .iconbtn:active{background:rgba(11,15,25,.5)}
-#date{align-self:center;text-align:center;margin:4px 0 0;font-size:14px;color:var(--ink2)}
+#date{align-self:center;text-align:center;margin:clamp(8px,1.8dvh,18px) 0 0;font-size:14px;color:var(--ink2)}
 #date button{font-size:14px;color:var(--txt)}
 /* quote */
-.quote{margin-top:3vh;width:100%;max-width:min(560px,92%);text-align:center}
+.quote{margin-top:clamp(18px,4dvh,44px);width:100%;max-width:min(560px,92%);text-align:center}
 .quote p{font-family:var(--serif);font-size:clamp(18px,min(5.6vw,3.3vh),30px);line-height:1.5;margin:0;text-wrap:balance}
-.quote .by{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:10px}
+.quote .by{display:flex;flex-direction:row;justify-content:center;align-items:center;gap:12px;margin-top:clamp(6px,1.2dvh,12px)}
+.quote .by .qt{display:contents}
+#qNext{order:-1}
 .quote cite{font-style:normal;font-size:14px;color:var(--ink2)}
-.qt{display:flex;gap:28px}
+.qt{display:flex}
 .qt button{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:var(--ink2)}
 .qt button:active{background:rgba(255,255,255,.1)}
 .qt svg{width:19px;height:19px}
 body.keepquote.sitting #quote{opacity:.85!important}
 /* orb */
-.orbwrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:0}
-.orb{position:relative;width:min(58vw,250px,31vh);aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.orbwrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:0;container-type:size;padding:clamp(22px,4.5dvh,52px) 0}
+.orb{position:relative;width:min(58vw,250px,31vh);width:max(110px,min(62cqw,calc((100cqh - 36px) * .82),270px));aspect-ratio:1;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column}
 .orb::before{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--glow) 32%,transparent),color-mix(in srgb,var(--glow) 9%,transparent) 60%,transparent 72%);animation:breathe 10s cubic-bezier(.45,0,.55,1) infinite}
 body:not(.sitting) .orb::before{animation-duration:14s}
 @keyframes breathe{0%,100%{transform:scale(.82);opacity:.7}50%{transform:scale(1.08);opacity:1}}
@@ -77,7 +79,7 @@ body.insession .hint{display:block}
 #left{font-size:15px;color:var(--ink2);margin-top:14px;min-height:20px;text-shadow:0 1px 10px rgba(0,0,0,.35)}
 body.notime #left{visibility:hidden}
 /* length picker (tide) */
-.tide{width:calc(100% + 48px);margin:0 -24px;height:62px;display:flex;align-items:flex-end;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;position:relative;padding:0 calc(50% - 26px);
+.tide{flex:none;width:calc(100% + 48px);margin:0 -24px;height:62px;display:flex;align-items:flex-end;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;position:relative;padding:0 calc(50% - 26px);
  -webkit-mask:linear-gradient(90deg,transparent,#000 24%,#000 76%,transparent);mask:linear-gradient(90deg,transparent,#000 24%,#000 76%,transparent)}
 .tide::-webkit-scrollbar{display:none}
 .tide .n{flex:none;width:52px;height:60px;scroll-snap-align:center;font-family:var(--serif);font-size:19px;color:var(--ink2);padding-bottom:18px;display:flex;align-items:flex-end;justify-content:center;position:relative;text-shadow:0 1px 8px rgba(0,0,0,.3);transition:font-size .2s,color .2s}
@@ -86,17 +88,23 @@ body.notime #left{visibility:hidden}
 .tide .n.on::after{height:14px;width:2px;margin-left:-1px;background:var(--glow);opacity:1}
 body.insession .tide{visibility:hidden}
 /* begin */
-.begin{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:10px;height:56px;min-width:150px;padding:0 30px 0 24px;border-radius:28px;background:var(--glow);color:var(--glowInk);font-weight:500;font-size:17px;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);transition:background .6s,color .6s}
+.begin{flex:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;margin-top:clamp(14px,2.8dvh,30px);display:flex;align-items:center;justify-content:center;gap:10px;height:56px;min-width:150px;padding:0 30px 0 24px;border-radius:28px;background:var(--glow);color:var(--glowInk);font-weight:500;font-size:17px;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);transition:background .6s,color .6s}
 .begin svg{width:18px;height:18px;fill:currentColor}
 .begin:active{transform:scale(.97)}
 body.insession .begin{background:rgba(11,15,25,.34);color:var(--txt);box-shadow:none}
 #holdhint{font-size:14px;color:var(--ink2);margin-top:10px;min-height:20px;opacity:0;transition:opacity 1s;text-shadow:0 1px 10px rgba(0,0,0,.35)}
 body.insession #holdhint{opacity:1}
-.journey{margin-top:10px;height:40px;padding:0 14px;border-radius:20px;font-size:15px;display:flex;align-items:center;gap:9px;background:rgba(11,15,25,.28)}
+.journey{flex:none;margin-top:clamp(8px,1.6dvh,18px);height:40px;padding:0 14px;border-radius:20px;font-size:15px;display:flex;align-items:center;gap:9px;background:rgba(11,15,25,.28)}
 .journey .dots{display:flex;gap:4px}
 .journey .dots span{width:7px;height:7px;border-radius:50%;background:var(--glow)}
 .journey .dots span.off{background:rgba(255,255,255,.25)}
 body.insession .journey{visibility:hidden}
+.topr{display:flex;align-items:center;gap:10px}
+.jmini{display:none;height:36px;padding:0 12px;border-radius:18px;align-items:center;gap:8px;font-size:14px;background:rgba(11,15,25,.28);color:var(--txt)}
+.jmini .dots{display:flex;gap:3px}
+.jmini .dots span{width:5px;height:5px;border-radius:50%;background:var(--glow)}
+.jmini .dots span.off{background:rgba(255,255,255,.25)}
+@media (max-height:720px){#statsBtn{display:none}.jmini{display:flex}}
 /* sheet */
 .scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:.3s;z-index:4}.scrim.show{opacity:1;pointer-events:auto}
 .sheet{position:fixed;left:0;right:0;bottom:0;max-width:640px;margin:0 auto;z-index:5;background:var(--panel);border-radius:24px 24px 0 0;max-height:88vh;max-height:88dvh;display:flex;flex-direction:column;transform:translateY(105%);transition:transform .45s cubic-bezier(.2,.8,.2,1);box-shadow:0 -10px 40px -10px rgba(0,0,0,.6)}
@@ -168,7 +176,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 <body>
 <div class="sky"></div>
 <div class="wrap">
-  <div class="top hide"><span class="brand" aria-label="Nagi-do"><b aria-hidden="true">凪</b>nagi-do</span><button class="iconbtn" id="menuBtn" aria-label="Settings"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button></div>
+  <div class="top hide"><span class="brand" aria-label="Nagi-do"><b aria-hidden="true">凪</b>nagi-do</span><span class="topr"><button class="jmini" id="jMini"></button><button class="iconbtn" id="menuBtn" aria-label="Settings"><svg class="i" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg></button></span></div>
   <div id="date" class="hide"></div>
   <div class="quote hide" id="quote"><p id="qt"></p><div class="by"><cite id="qa"></cite><span class="qt">
     <button id="qNext" aria-label="Another quote"><svg class="i" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
@@ -317,7 +325,8 @@ function leftWords(s){s=Math.max(0,Math.ceil(s));if(s>=60){const m=Math.ceil(s/6
 function showTime(s){if(T&&T.started){$('time').textContent=fmt(s);$('left').textContent=leftWords(s)}else if(!T)showIdle()}
 function monthMins(){const p=today().slice(0,7);return Math.round(Object.entries(S.log).filter(([k])=>k.startsWith(p)).reduce((a,[,l])=>a+l.s,0)/60)}
 function drawJourney(){const s=streak();let d='';for(let i=6;i>=0;i--){const x=new Date();x.setDate(x.getDate()-i);d+=`<span class="${S.log[ds(x)]?'':'off'}"></span>`}
- $('statsBtn').innerHTML=`<span class="dots" aria-hidden="true">${d}</span>${s?s+'-day streak':'Your journey'}`}
+ $('statsBtn').innerHTML=`<span class="dots" aria-hidden="true">${d}</span>${s?s+'-day streak':'Your journey'}`;
+ $('jMini').innerHTML=`<span class="dots" aria-hidden="true">${d}</span>${s||''}`;$('jMini').setAttribute('aria-label',s?'Your journey, '+s+'-day streak':'Your journey')}
 drawPicker();showIdle();
 const SNAME={bowl:'Bowl',gong:'Gong',chime:'Chime'};
 
@@ -499,6 +508,7 @@ if(EMBED){const b=document.createElement('button');b.textContent='‹ Streak';b.
 $('statsBtn').onclick=()=>{const v=Object.values(S.log);const mins=Math.round(v.reduce((a,l)=>a+l.s,0)/60);
  let dots='';for(let i=27;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const l=S.log[ds(d)];dots+=`<span class="${l?'on':''}" title="${ds(d)}"${l?` style="--a:${Math.min(100,40+l.s/60*4)}%"`:''}></span>`}
  openSheet('Your journey',`<div class="stats"><div><b>${streak()}</b><span>day streak</span></div><div><b>${v.reduce((a,l)=>a+l.n,0)}</b><span>sessions</span></div><div><b>${mins}</b><span>minutes</span></div></div><div class="cal" aria-label="Last four weeks">${dots}</div><p class="calcap">The last four weeks</p>`)};
+$('jMini').onclick=()=>$('statsBtn').onclick();
 drawJourney();
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
