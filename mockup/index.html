@@ -105,7 +105,7 @@ body{margin:0;padding:calc(env(safe-area-inset-top) + 28px) 20px 60px}
 .toggle{width:51px;height:31px;border-radius:16px;background:#3a4256;position:relative;flex:none}
 .toggle::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.35)}
 .toggle.on{background:var(--glow)}.toggle.on::after{left:22px}
-.looks{display:flex;gap:12px;overflow:hidden;padding:12px 2px 6px}
+.looks{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding:12px 6px 6px;margin:0 -8px;-webkit-mask:linear-gradient(90deg,#000 80%,transparent);mask:linear-gradient(90deg,#000 80%,transparent)}.looks::-webkit-scrollbar{display:none}
 .look{flex:none;width:62px;text-align:center;font-size:12.5px;color:var(--ink2)}
 .look i{display:block;width:62px;height:84px;border-radius:14px;margin-bottom:6px}
 .look.on i{box-shadow:0 0 0 2px #0f1421,0 0 0 4px var(--glow)}
@@ -253,7 +253,7 @@ body{margin:0;padding:calc(env(safe-area-inset-top) + 28px) 20px 60px}
   </div>
   <ul>
     <li><b>Background sounds as tiles</b> with small drawn icons, so six choices don't wrap onto two crowded lines.</li>
-    <li><b>Switches for on/off</b> (countdown, voice, starting bell, vibrate) instead of two pills each.</li>
+    <li><b>Switches for on/off</b> (countdown and voice here; starting bell and vibrate too) instead of two pills each.</li><li><b>Looks you can swipe</b>, shown as tall sky previews, with Midnight just past Sakura.</li>
     <li><b>Bigger tap targets.</b> Today's pills are about 30 px tall; these are 36 to 56 px.</li>
     <li><b>About moves to the bottom</b> as a quiet footer, so your settings come first (your call; it's at the top now because you asked).</li>
   </ul>
