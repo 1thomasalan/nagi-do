@@ -32,7 +32,7 @@ body[data-theme=ocean]{--sky:radial-gradient(120% 80% at 50% 110%,#6fd6d6 0%,#2b
 body[data-theme=forest]{--sky:radial-gradient(120% 80% at 50% 110%,#b9cc8c 0%,#55806a 28%,#1f3b33 58%,#0a1613 90%);--glow:#e6f2c4}
 body[data-theme=sakura]{--sky:radial-gradient(120% 80% at 50% 110%,#ffd3de 0%,#e59ab5 27%,#7a5a85 57%,#1f1830 90%);--glow:#ffe3ec}
 body[data-theme=midnight]{--sky:radial-gradient(120% 80% at 50% 110%,#1b2131 0%,#090b11 50%,#000 85%);--glow:#cfd8ec}
-.wrap{position:relative;height:100%;height:100dvh;display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top) + clamp(14px,2.6dvh,28px)) 24px calc(env(safe-area-inset-bottom) + clamp(36px,5.8dvh,58px));max-width:640px;margin:0 auto}
+.wrap{position:relative;height:100%;height:100dvh;display:flex;flex-direction:column;align-items:center;padding:calc(env(safe-area-inset-top) + clamp(14px,2.6dvh,28px)) 24px calc(env(safe-area-inset-bottom) + clamp(36px,5.4dvh,52px));max-width:640px;margin:0 auto}
 .hide{transition:opacity 1.2s}
 body.sitting .hide{opacity:0;pointer-events:none}
 /* top */
@@ -99,7 +99,7 @@ body.insession .begin{background:rgba(11,15,25,.34);color:var(--txt);box-shadow:
 #holdhint{position:absolute;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + clamp(6px,1.2dvh,14px));text-align:center;pointer-events:none;font-size:14px;color:var(--ink2);min-height:20px;opacity:0;transition:opacity 1s;text-shadow:0 1px 10px rgba(0,0,0,.35)}
 body.insession #holdhint{opacity:1;animation:hintout 1.5s ease 7s forwards}
 @keyframes hintout{to{opacity:0}}
-.journey{flex:none;margin-top:clamp(8px,1.6dvh,18px);height:40px;padding:0 14px;border-radius:20px;font-size:15px;display:flex;align-items:center;gap:9px;background:rgba(11,15,25,.28)}
+.journey{flex:none;margin-top:clamp(18px,3.4dvh,36px);height:40px;padding:0 14px;border-radius:20px;font-size:15px;display:flex;align-items:center;gap:9px;background:rgba(11,15,25,.28)}
 .journey .dots{display:flex;gap:4px}
 .journey .dots span{width:7px;height:7px;border-radius:50%;background:var(--glow)}
 .journey .dots span.off{background:rgba(255,255,255,.25)}
