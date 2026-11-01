@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0e1420">
 <title>Nagi-dō · The Way of Stillness</title>
+<meta name="description" content="A calm, free meditation timer with a breathing orb, bells, ocean and rain sounds, daily quotes and a gentle streak. No sign-up; your data stays on your phone.">
+<link rel="canonical" href="https://1thomasalan.github.io/nagi-do/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Nagi-dō">
+<meta property="og:title" content="Nagi-dō · The Way of Stillness">
+<meta property="og:description" content="A calm, free meditation timer. Breathing orb, bells, ocean and rain, daily quotes. No sign-up.">
+<meta property="og:url" content="https://1thomasalan.github.io/nagi-do/">
+<meta property="og:image" content="https://1thomasalan.github.io/nagi-do/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nagi-dō, The Way of Stillness, over a calm sea at dusk">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Nagi-dō · The Way of Stillness">
+<meta name="twitter:description" content="A calm, free meditation timer. Breathing orb, bells, ocean and rain, daily quotes. No sign-up.">
+<meta name="twitter:image" content="https://1thomasalan.github.io/nagi-do/og.jpg">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="icon" href="icon-192.png" sizes="192x192">
@@ -203,7 +218,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
   <button class="journey hide" id="statsBtn"></button>
 </div>
 
-<div class="end" id="end" role="dialog" aria-label="Session complete"><svg class="k logo" aria-hidden="true"><use href="#lg"/></svg><h2>Be well, Alan.</h2><p id="endmsg"></p>
+<div class="end" id="end" role="dialog" aria-label="Session complete"><svg class="k logo" aria-hidden="true"><use href="#lg"/></svg><h2>Be well.</h2><p id="endmsg"></p>
  <div class="num"><div><b id="endStreak">1</b><span id="endStreakL">day in a row</span></div><div><b id="endMonth">0</b><span>minutes this month</span></div></div>
  <button class="begin" id="endOk">Done</button></div>
 <div class="scrim" id="scrim"></div>
@@ -211,7 +226,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 
 <script>
 const QUOTES=[
-["Peace comes from within. Do not seek it without.","Buddha"],
+["Hatred is never appeased by hatred in this world. By non-hatred alone is hatred appeased.","Buddha, Dhammapada"],
 ["Nature does not hurry, yet everything is accomplished.","Lao Tzu"],
 ["The present moment is filled with joy and happiness. If you are attentive, you will see it.","Thich Nhat Hanh"],
 ["Quiet the mind, and the soul will speak.","Ma Jaya Sati Bhagavati"],
@@ -226,7 +241,7 @@ const QUOTES=[
 ["Sit quietly, doing nothing, spring comes, and the grass grows by itself.","Zen proverb"],
 ["Wherever you are, be all there.","Jim Elliot"],
 ["Almost everything will work again if you unplug it for a few minutes, including you.","Anne Lamott"],
-["The mind is everything. What you think you become.","Buddha"],
+["Better than a thousand useless words is one useful word, hearing which one attains peace.","Buddha, Dhammapada"],
 ["Be still, and know.","Psalm 46:10"],
 ["Very little is needed to make a happy life; it is all within yourself, in your way of thinking.","Marcus Aurelius"],
 ["Nowhere can man find a quieter or more untroubled retreat than in his own soul.","Marcus Aurelius"],
@@ -497,7 +512,7 @@ function settings(){
  <div class="about"><svg class="k logo" aria-hidden="true"><use href="#lg"/></svg><h4>nagi-dō</h4><div class="sub">The way of stillness</div>
  <p>A personal space for meditation. Choose your time, settle into silence or soothing sounds, and follow your own rhythm with optional breathing guidance.</p>
  <p class="m">Nagi (凪) is the calm when the wind drops and the sea goes still. Dō (道) is the way.</p></div>
- <p class="credit">Nagi-dō, made for Alan by Hark</p>`);
+ <p class="credit">Nagi-dō · made by Thomas Alan Smilie</p>`);
  wireSegs();
  document.querySelectorAll('.look').forEach(b=>b.onclick=()=>{S.theme=b.dataset.theme;save();applyLook();document.querySelectorAll('.look').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)})});
  $('vol').onchange=e=>{S.vol=+e.target.value;save();strike()};
