@@ -191,6 +191,16 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
  .orb::before,.orb::after,body.guided.sitting .orb::before,body.guided.sitting .orb::after{animation:none!important;transform:none!important;transition:none!important}
  .end.show{animation:none}.sheet,.toggle::after,.tide .n{transition-duration:.01s}
 }
+.end .endnote{margin:26px auto 0;font-size:14px;color:var(--ink2);line-height:1.55;max-width:290px}
+.endnote button{font:inherit;color:var(--glow);padding:2px 0;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.endnote .nn{display:block;margin:6px auto 0;text-decoration:none;color:var(--ink2);font-size:13px}
+.datanote{padding:14px 0 8px;margin:0;font-size:14px;color:var(--ink2);line-height:1.55}
+.datanote b{color:var(--ink);font-weight:500}
+.grp .rowbtn+.rowbtn,.datanote+.rowbtn{border-top:1px solid rgba(255,255,255,.07)}
+.codebox{width:100%;min-height:92px;margin:10px 0 4px;border-radius:12px;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.1);color:var(--ink);font:13px/1.4 ui-monospace,monospace;padding:10px;box-sizing:border-box}
+.rsum{text-align:center;padding:10px 0 4px}.rsum .stats{margin:14px 0}
+.toast{position:fixed;left:50%;bottom:calc(28px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;background:var(--raise);color:var(--ink);padding:12px 18px;border-radius:14px;font-size:14px;z-index:60;transition:.35s;max-width:86vw;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 </style>
 <!-- Fathom - beautiful, simple website analytics -->
 <script src="https://cdn.usefathom.com/script.js" data-site="EPNPWRUH" defer></script>
@@ -223,7 +233,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 
 <div class="end" id="end" role="dialog" aria-label="Session complete"><svg class="k logo" aria-hidden="true"><use href="#lg"/></svg><h2>Be well.</h2><p id="endmsg"></p>
  <div class="num"><div><b id="endStreak">1</b><span id="endStreakL">day in a row</span></div><div><b id="endMonth">0</b><span>minutes this month</span></div></div>
- <button class="begin" id="endOk">Done</button></div>
+ <button class="begin" id="endOk">Done</button><p class="endnote" id="endNote" hidden></p></div><div class="toast" id="toast" role="status"></div>
 <div class="scrim" id="scrim"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="shead"><h3 id="sheetTitle"></h3><button class="done" id="closeSheet">Done</button></div><div id="sheetBody"></div></div>
 
@@ -459,7 +469,7 @@ function stop(record){
  T=null;setTimeout(()=>{if(!T&&silentEl)silentEl.pause()},15000);document.body.classList.remove('sitting','insession');setGo('idle');$('arc').style.strokeDashoffset=C;showIdle();drawJourney();return sat;
 }
 function complete(){const total=T.total;stop(true);finalBell();if(S.vib&&navigator.vibrate)navigator.vibrate([400,200,400]);
- const mm=Math.max(1,Math.round(total/60)),NW=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten'];$('endmsg').textContent=(mm<=10?NW[mm]:mm)+' minute'+(mm===1?'':'s')+' of stillness.';const sk=streak();$('endStreak').textContent=sk;$('endStreakL').textContent=sk===1?'day in a row':'days in a row';$('endMonth').textContent=monthMins();$('end').classList.add('show')}
+ const mm=Math.max(1,Math.round(total/60)),NW=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten'];$('endmsg').textContent=(mm<=10?NW[mm]:mm)+' minute'+(mm===1?'':'s')+' of stillness.';const sk=streak();$('endStreak').textContent=sk;$('endStreakL').textContent=sk===1?'day in a row':'days in a row';$('endMonth').textContent=monthMins();endNote();$('end').classList.add('show');keepStorage()}
 $('endOk').onclick=()=>$('end').classList.remove('show');
 function setGo(s){$('goIcon').innerHTML=s==='pause'?'<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/>':'<path d="M8 5v14l11-7z"/>';$('goLbl').textContent=s==='pause'?'Pause':s==='play'?'Resume':'Begin'}
 let lp;const go=$('go');
@@ -510,8 +520,14 @@ function settings(){
   ${opt('<label for="vol">Bell volume</label>',`<input type="range" min="0.1" max="1" step="0.05" value="${S.vol}" id="vol">`,'slider')}
   ${tog('vib','Vibrate at end')}
  </div>
+ <div class="gt">Your progress</div><div class="grp">
+  <p class="datanote">Your progress lives on this device. There's no account and nothing is sent anywhere, so back it up before you change phones.<br><b>${backupLine()}</b></p>
+  <button class="rowbtn" id="bkSave">Save backup file</button>
+  <button class="rowbtn" id="bkCode">Copy backup code</button>
+  <button class="rowbtn" id="bkRestore">Restore from a backup</button>
+ </div>
  <div class="grp" style="margin-top:20px"><button class="rowbtn" id="resetLook">Restore original look and sound</button></div>
- <p class="help">Swipe the numbers to choose your time. Tap Begin to start and Pause to rest; hold Pause to end early. Your sessions stay on this phone.</p>
+ <p class="help">Swipe the numbers to choose your time. Tap Begin to start and Pause to rest; hold Pause to end early.</p>
  <div class="about"><svg class="k logo" aria-hidden="true"><use href="#lg"/></svg><h4>nagi-dō</h4><div class="sub">The way of stillness</div>
  <p>A personal space for meditation. Choose your time, settle into silence or soothing sounds, and follow your own rhythm with optional breathing guidance.</p>
  <p class="m">Nagi (凪) is the calm when the wind drops and the sea goes still. Dō (道) is the way.</p></div>
@@ -520,6 +536,7 @@ function settings(){
  document.querySelectorAll('.look').forEach(b=>b.onclick=()=>{S.theme=b.dataset.theme;save();applyLook();document.querySelectorAll('.look').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)})});
  $('vol').onchange=e=>{S.vol=+e.target.value;save();strike()};
  $('avol').onchange=e=>{S.ambVol=+e.target.value;save();if(S.ambient!=='off')previewAmbient(S.ambient)};
+ $('bkSave').onclick=saveBackup;$('bkCode').onclick=copyCode;$('bkRestore').onclick=restoreSheet;
  $('resetLook').onclick=()=>{const keep={min:S.min,log:S.log};S=Object.assign({},D,keep);save();applyLook();settings()};
 }
 $('menuBtn').onclick=settings;
@@ -536,6 +553,37 @@ $('statsBtn').onclick=()=>{const v=Object.values(S.log);const mins=Math.round(v.
  openSheet('Your journey',`<div class="stats"><div><b>${streak()}</b><span>day streak</span></div><div><b>${v.reduce((a,l)=>a+l.n,0)}</b><span>sessions</span></div><div><b>${mins}</b><span>minutes</span></div></div><div class="cal" aria-label="Last four weeks">${dots}</div><p class="calcap">The last four weeks</p>`)};
 $('jMini').onclick=()=>$('statsBtn').onclick();
 drawJourney();
+
+// ---- backup & restore ----
+const DAY=864e5;
+function keepStorage(){try{navigator.storage&&navigator.storage.persist&&navigator.storage.persisted().then(p=>p||navigator.storage.persist())}catch(_){}}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),3200)}
+function backupLine(){if(!S.backupAt)return 'Last backup: never';const d=new Date(S.backupAt);return 'Last backup: '+d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})}
+function tally(log){const v=Object.values(log||{});return{days:v.length,n:v.reduce((a,l)=>a+l.n,0),m:Math.round(v.reduce((a,l)=>a+l.s,0)/60),last:Object.keys(log||{}).sort().pop()}}
+function packed(){return{app:'nagi-do',v:1,saved:new Date().toISOString(),data:S}}
+function marked(){S.backupAt=Date.now();save()}
+async function saveBackup(){const name='nagi-do-backup-'+today()+'.json';const blob=new Blob([JSON.stringify(packed())],{type:'application/json'});
+ try{const f=new File([blob],name,{type:'application/json'});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Nagi-dō backup'});marked();toast('Backup saved.');return}}catch(e){if(e&&e.name==='AbortError')return}
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000);marked();toast('Backup saved to your downloads.')}
+async function copyCode(){const code='NAGIDO1.'+btoa(unescape(encodeURIComponent(JSON.stringify({v:1,data:S}))));
+ try{await navigator.clipboard.writeText(code);marked();toast('Backup code copied. Paste it somewhere safe, like Notes.')}catch(_){openSheet('Backup code',`<p class="help">Copy this code and keep it somewhere safe, like Notes or an email to yourself.</p><textarea class="codebox" readonly>${code}</textarea>`);marked()}}
+function readBackup(txt){txt=(txt||'').trim();let o;if(txt.startsWith('NAGIDO1.'))o=JSON.parse(decodeURIComponent(escape(atob(txt.slice(8)))));else o=JSON.parse(txt);const d=o.data||o;if(!d||typeof d.log!=='object')throw 0;return d}
+function restoreSheet(){openSheet('Restore progress',`<p class="help">Choose a backup file, or paste a backup code. Sessions already on this device are kept.</p>
+ <div class="grp" style="margin-top:14px"><button class="rowbtn" id="rsFile">Choose backup file</button></div><input type="file" id="rsIn" accept=".json,application/json" hidden>
+ <textarea class="codebox" id="rsCode" placeholder="Or paste a backup code"></textarea>
+ <div class="grp"><button class="rowbtn" id="rsGo">Check backup</button></div>`);
+ $('rsFile').onclick=()=>$('rsIn').click();$('rsIn').onchange=e=>{const f=e.target.files[0];if(f)f.text().then(previewRestore)};$('rsGo').onclick=()=>previewRestore($('rsCode').value)}
+function previewRestore(txt){let d;try{d=readBackup(txt)}catch(_){toast("That doesn't look like a Nagi-dō backup.");return}const t=tally(d.log);
+ const last=t.last?new Date(t.last+'T12:00').toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'none';
+ openSheet('Restore progress',`<div class="rsum"><p class="help" style="margin:0">This backup holds</p><div class="stats"><div><b>${t.days}</b><span>days sat</span></div><div><b>${t.n}</b><span>sessions</span></div><div><b>${t.m}</b><span>minutes</span></div></div><p class="help" style="margin:0">Last session ${last}. It will be combined with this device's sessions.</p></div>
+ <div class="grp" style="margin-top:18px"><button class="rowbtn" id="rsYes">Restore</button></div>`);
+ $('rsYes').onclick=()=>{for(const[k,l]of Object.entries(d.log)){const c=S.log[k];if(!c||l.s>c.s)S.log[k]=l}save();drawJourney();closeSheet&&closeSheet();toast('Welcome back. Your progress is restored.')}}
+function endNote(){const e=$('endNote');e.hidden=true;if(EMBED)return;const n=tally(S.log).n,now=Date.now();
+ const ios=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ const inApp=navigator.standalone||matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches;
+ if(ios&&!inApp&&n>=2&&!S.hsHint){e.innerHTML='Add Nagi-dō to your Home Screen so Safari keeps your progress. Tap Share, then Add to Home Screen.<button class="nn" id="nnHs">Not now</button>';e.hidden=false;$('nnHs').onclick=()=>{S.hsHint=1;save();e.hidden=true};return}
+ if(n>=5&&now-(S.backupAt||0)>30*DAY&&now-(S.noteAt||0)>7*DAY){S.noteAt=now;save();e.innerHTML='Your progress lives on this device. <button id="nnBk">Back it up</button> before you change phones.';e.hidden=false;$('nnBk').onclick=()=>saveBackup().then(()=>e.hidden=true)}}
+
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body>
