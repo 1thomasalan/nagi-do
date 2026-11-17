@@ -445,7 +445,8 @@ async function begin(){
  if(!S.prep)startSit();else{$('hint').textContent='get comfortable';$('left').textContent=''}
  loop();
 }
-function startSit(){T.started=true;T.ph='';if(S.voice&&S.breath==='natural')setTimeout(()=>{if(T&&T.started&&!T.paused)say('settle')},S.start?2500:300);if(silentEl){const pr=silentEl.play();if(pr&&pr.catch)pr.catch(()=>{})}T.end=Date.now()+T.total*1000;if(S.start)strike(S.sound,S.vol*.6);startAmbient()}
+function fe(n){try{if(window.fathom&&fathom.trackEvent)fathom.trackEvent(n)}catch(_){}}
+function startSit(){T.started=true;fe('Session started');T.ph='';if(S.voice&&S.breath==='natural')setTimeout(()=>{if(T&&T.started&&!T.paused)say('settle')},S.start?2500:300);if(silentEl){const pr=silentEl.play();if(pr&&pr.catch)pr.catch(()=>{})}T.end=Date.now()+T.total*1000;if(S.start)strike(S.sound,S.vol*.6);startAmbient()}
 function loop(){
  if(T.paused)return;
  if(!T.started){const r=(T.prepEnd-Date.now())/1000;$('hint').textContent='get comfortable';$('left').textContent='Starting in '+Math.max(1,Math.ceil(r));if(r<=0)startSit();return}
@@ -468,7 +469,7 @@ function stop(record){
  if(record&&sat>=30){const l=S.log[today()]||{n:0,s:0};l.n++;l.s+=sat;S.log[today()]=l;save()}
  T=null;setTimeout(()=>{if(!T&&silentEl)silentEl.pause()},15000);document.body.classList.remove('sitting','insession');setGo('idle');$('arc').style.strokeDashoffset=C;showIdle();drawJourney();return sat;
 }
-function complete(){const total=T.total;stop(true);finalBell();if(S.vib&&navigator.vibrate)navigator.vibrate([400,200,400]);
+function complete(){const total=T.total;stop(true);fe('Session completed');finalBell();if(S.vib&&navigator.vibrate)navigator.vibrate([400,200,400]);
  const mm=Math.max(1,Math.round(total/60)),NW=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten'];$('endmsg').textContent=(mm<=10?NW[mm]:mm)+' minute'+(mm===1?'':'s')+' of stillness.';const sk=streak();$('endStreak').textContent=sk;$('endStreakL').textContent=sk===1?'day in a row':'days in a row';$('endMonth').textContent=monthMins();endNote();$('end').classList.add('show');keepStorage()}
 $('endOk').onclick=()=>$('end').classList.remove('show');
 function setGo(s){$('goIcon').innerHTML=s==='pause'?'<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/>':'<path d="M8 5v14l11-7z"/>';$('goLbl').textContent=s==='pause'?'Pause':s==='play'?'Resume':'Begin'}
